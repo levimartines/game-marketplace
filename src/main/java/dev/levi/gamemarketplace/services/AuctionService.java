@@ -6,7 +6,9 @@ import dev.levi.gamemarketplace.entities.Bid;
 import dev.levi.gamemarketplace.entities.Item;
 import dev.levi.gamemarketplace.entities.Player;
 import dev.levi.gamemarketplace.enums.AuctionStatus;
+import dev.levi.gamemarketplace.error.exceptions.AuctionExpiredException;
 import dev.levi.gamemarketplace.error.exceptions.AuctionNotActiveException;
+import dev.levi.gamemarketplace.error.exceptions.BidTooLowException;
 import dev.levi.gamemarketplace.error.exceptions.ResourceNotFoundException;
 import dev.levi.gamemarketplace.redis.AuctionExpirationPublisher;
 import dev.levi.gamemarketplace.repositories.AuctionRepository;
@@ -43,10 +45,10 @@ public class AuctionService {
                 .orElseThrow(() -> new ResourceNotFoundException("Auction not found with id: " + auctionId));
 
         if (auction.getStatus() != AuctionStatus.ACTIVE) {
-            throw new AuctionNotActiveException("Auction is not active or has already expired.");
+            throw new AuctionNotActiveException(auctionId);
         }
         if (auction.getEndsAt().isBefore(Instant.now())) {
-            throw new AuctionExpiredException("Auction is not active or has already expired.");
+            throw new AuctionExpiredException(auctionId);
         }
 
         if (auction.getSeller().getId().equals(bidderId)) {
@@ -56,8 +58,7 @@ public class AuctionService {
         // 2. Get the highest bid after locking row
         var currentHighest = auction.getCurrentPrice() != null ? auction.getCurrentPrice() : 100;
         if (amount <= currentHighest) {
-            throw new BidTooLowException(amount, currentHighest)
-            );
+            throw new BidTooLowException(amount, currentHighest);
         }
 
         Player bidder = playerRepository.findById(bidderId)
