@@ -1,0 +1,24 @@
+﻿spring:
+  application:
+    name: game-marketplace
+  output:
+    ansi:
+      enabled: detect
+  profiles:
+    active:
+      - local
+
+logging:
+  structured:
+    format:
+      console: logstash
+  level:
+    root: INFO
+    com.example.marketplace: INFO
+    org.hibernate.SQL: DEBUG
+    org.springframework.security: WARN
+
+
+jwt:
+  secret: "troque-isso-por-uma-chave-forte-de-pelo-menos-32-caracteres"
+  expiration-ms: 3600000 # 1h

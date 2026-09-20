@@ -1,0 +1,28 @@
+<configuration>
+    <springProfile name="default,dev,local">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%cyan(%d{HH:mm:ss.SSS}) %highlight(%-5level) %magenta([%thread]) %yellow(%logger{36}) - %msg %X{%green(traceId=traceId)}%n
+                    </pattern>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod,gcp">
+        <appender name="CONSOLE_JSON" class="ch.qos.logback.core.ConsoleAppender">
+            <layout class="com.example.marketplace.logging.GcpJsonLayout"/>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE_JSON"/>
+        </root>
+    </springProfile>
+
+    <logger name="com.example.marketplace" level="INFO"/>
+    <logger name="org.hibernate.SQL" level="WARN"/>
+
+</configuration>

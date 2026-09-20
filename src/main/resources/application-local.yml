@@ -1,0 +1,33 @@
+﻿spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/marketplace
+    username: marketplace
+    password: marketplace
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+logging:
+  level:
+    root: info
+
+game:
+  drop:
+    item-weights:
+      BOW: 30
+      SWORD: 40
+      AXE: 30
+    rarity-weights:
+      COMMON: 70
+      UNCOMMON: 25
+      RARE: 5
