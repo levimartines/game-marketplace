@@ -14,7 +14,7 @@
 
     <springProfile name="prod,gcp">
         <appender name="CONSOLE_JSON" class="ch.qos.logback.core.ConsoleAppender">
-            <layout class="com.example.marketplace.logging.GcpJsonLayout"/>
+            <layout class="dev.levi.gamemarketplace.logging.GcpJsonLayout"/>
         </appender>
 
         <root level="INFO">
@@ -22,7 +22,7 @@
         </root>
     </springProfile>
 
-    <logger name="com.example.marketplace" level="INFO"/>
+    <logger name="dev.levi.gamemarketplace" level="INFO"/>
     <logger name="org.hibernate.SQL" level="WARN"/>
 
 </configuration>

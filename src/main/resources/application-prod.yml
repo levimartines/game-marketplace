@@ -22,7 +22,7 @@ logging:
       console: logstash
   level:
     root: INFO
-    com.example.marketplace: INFO
+    dev.levi.gamemarketplace: INFO
     org.hibernate.SQL: WARN
     org.springframework.security: INFO
 

@@ -14,10 +14,9 @@ logging:
       console: logstash
   level:
     root: INFO
-    com.example.marketplace: INFO
+    dev.levi.gamemarketplace: INFO
     org.hibernate.SQL: DEBUG
     org.springframework.security: WARN
-
 
 jwt:
   secret: "troque-isso-por-uma-chave-forte-de-pelo-menos-32-caracteres"
