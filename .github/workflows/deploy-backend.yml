@@ -2,7 +2,7 @@ name: Deploy Backend (Spring Boot)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 permissions:
   contents: read
@@ -72,7 +72,7 @@ jobs:
             SPRING_DATASOURCE_USERNAME=postgres
             SPRING_DATA_REDIS_HOST=35.202.26.48
             SPRING_DATA_REDIS_PORT=6379
-            CORS_ALLOWED_ORIGINS=http://localhost:4200,https://game-marketplace-509222.web.app
+            CORS_ALLOWED_ORIGINS=https://game-marketplace-509222.web.app
           secrets: |
             SPRING_DATASOURCE_PASSWORD=DB_PASSWORD:latest
             JWT_SECRET=JWT_SECRET:latest
